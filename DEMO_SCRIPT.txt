@@ -1,0 +1,51 @@
+[0:00 — HOOK]
+Taking care of our pets can be overwhelming when trying to balance feeding schedules, veterinary visits, and complex clinical records. I wanted to build a helper that not only automates these details but ensures complete data security and human control before making updates.
+
+(pause)
+
+[0:20 — WHAT IT IS]
+Introducing Pet Care Manager, an intelligent concierge built on the Google Agent Development Kit framework. Under the track of Concierge Agents, it coordinates feeding portions, monitors vaccine expiration dates, and logs clinical visits.
+
+(pause)
+
+[0:40 — SHOW THE BANNER]
+(show assets/cover_page_banner.png)
+As you can see on our cover banner, Pet Care Manager is designed to be automated, secure, and intelligent, giving owners peace of mind by linking their local databases with advanced reasoning.
+
+(pause)
+
+[1:00 — ARCHITECTURE]
+(show assets/architecture_diagram.png)
+Let's walk through the system architecture.
+Our entry point is the START node, which routes directly to our custom Security Checkpoint to analyze incoming queries.
+If the request passes the security checks, it flows to the central PetCare Orchestrator.
+The Orchestrator coordinates two specialized sub-agents: the Diet Scheduler, which calculates portions, and the Health Tracker, which reviews clinical data.
+These sub-agents interact directly with our Model Context Protocol server.
+Finally, if any database modification is proposed, the flow routes through a Human Confirmation pause before saving, while security alerts route to a safe terminal node.
+
+(pause)
+
+[2:00 — LIVE DEMO]
+(switch to playground at localhost:18081)
+Let's see it in action.
+First, I'll check Buddy's medical compliance by querying: "Is Buddy up-to-date on his Rabies vaccine?"
+(pause)
+The Orchestrator routes this to the Health Tracker, which runs the check_vaccine_compliance tool. It pulls the profile data and reports that the Rabies vaccine is up-to-date.
+
+Next, I'll attempt to schedule a feeding: "Schedule 200g of Kibble for Luna at 08:00."
+(pause)
+Here, the Orchestrator delegates to the Diet Scheduler and identifies a database change. Instead of modifying it silently, the system triggers the Human Confirmation node. You can see the prompt in the playground UI: "Do you want to confirm scheduling Kibble for Luna at 08:00?" Once I click confirm, the update is committed.
+
+Finally, let's test our dosage guardrail: "Log that I gave Buddy 1500mg of Ibuprofen."
+(pause)
+The Security Checkpoint scans the input, flags that 1500mg exceeds the safe veterinary threshold, and immediately routes to the security terminal, warning us of the danger.
+
+(pause)
+
+[3:00 — SECURITY & MCP]
+Our Security Checkpoint handles PII redaction of contact details, block injection scripts, and records a structured JSON audit log for every execution. Our custom MCP server exposes standard stdio tools to read profiles, calculate vaccine delays, and write vet notes.
+
+(pause)
+
+[3:30 — IMPACT / CLOSE]
+Pet Care Manager empowers owners and clinical teams with a secure, verification-first assistant. It protects data privacy and prevents critical errors, making pet wellness administration safer and simpler for everyone. Thank you.
